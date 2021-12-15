@@ -1,0 +1,21 @@
+.nav {
+    grid-area: nav;
+    background: #0a8696;
+    padding: 20px 15px;
+}
+.navMenu{
+
+}
+.navMenu li{
+    padding: 5px 10px;
+    border-bottom: 1px solid #15b7dd;
+}
+.navMenu li:last-child{
+    border-bottom: none; margin-top: 30px;
+}
+.navMenu li a{
+    color: #fff; text-decoration: none;
+}
+.navMenu li a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,9 @@
+.item {
+    background: aliceblue;
+    border-radius: 10px;
+    border: 1px solid #000;
+}
+
+.like {
+    font-size: 0.975rem;
+}

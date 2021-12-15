@@ -1,0 +1,17 @@
+@import "./reset.css";
+
+.app-wrapper {
+    max-width: 1200px;
+    min-width: 320px;
+    padding: 0 15px;
+    display: grid;
+
+    grid-template-rows: 140px 1fr 140px;
+    grid-template-columns: 2fr 10fr;
+
+    grid-template-areas:
+            'h h'
+            'nav con'
+            'foo foo';
+    grid-gap: 10px;
+}
