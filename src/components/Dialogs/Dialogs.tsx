@@ -1,7 +1,7 @@
-export const Dialods = () => {
+export const Dialogs = () => {
     return (
         <div>
-            Dialogs
+            Dialogs Page
         </div>
     )
 }
