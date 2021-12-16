@@ -19,3 +19,7 @@
 .navMenu li a:hover {
     text-decoration: underline;
 }
+.navMenu li a.navMenuActive{
+    color: #f5d221;
+    font-weight: 600;
+}
