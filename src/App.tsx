@@ -5,6 +5,8 @@ import {Header} from "./components/Header/Header";
 import {Footer} from "./components/Footer/Footer";
 import {Navbar} from "./components/Sidebar/Navbar";
 import {Profile} from "./components/Profile/Profile";
+import {Dialods} from "./components/Dialogs/Dialogs";
+import s from "./components/Profile/Profile.module.css";
 
 
 function App() {
@@ -12,7 +14,10 @@ function App() {
         <div className={'app-wrapper'}>
             <Header/>
             <Navbar/>
-            <Profile/>
+            <div className={'app-wrapper-cont'}>
+                <Dialods/>
+                {/*<Profile/>*/}
+            </div>
             <Footer/>
         </div>
     );

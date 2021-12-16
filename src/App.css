@@ -15,3 +15,6 @@
             'foo foo';
     grid-gap: 10px;
 }
+.app-wrapper-cont{
+    grid-area: con;
+}
