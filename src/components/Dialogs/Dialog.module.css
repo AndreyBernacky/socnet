@@ -1,0 +1,23 @@
+.dialogsWrap{
+    display: grid;
+    grid-template-columns: 220px 1fr;
+}
+.dialogs{
+    padding: 20px 20px; border-right: 2px solid #333848;
+}
+.dialogs>h1{
+    margin-bottom: 20px;
+}
+.dialogItem{
+    padding: 10px 0;
+}
+.active{
+    color: #0949dd;
+    font-weight: 600;
+}
+.messages{
+    padding: 20px 20px;
+}
+.message{
+    padding: 10px 20px; border-radius: 5px; border: 1px solid #333848; margin-bottom: 10px;
+}
