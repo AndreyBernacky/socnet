@@ -7,7 +7,9 @@ export const MyPosts = () => {
         <section className={s.posts_wrap}>
             <h2>My Posts</h2>
             <div className={s.postsNew}>
-               <textarea></textarea>
+                <div>
+                    <textarea></textarea>
+                </div>
                 <button>Add post</button>
                 <button>Del post</button>
             </div>
