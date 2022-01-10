@@ -1,8 +1,21 @@
 import React from "react";
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom'
+import {FriendsSideBlock} from "./FriendsSideBlock/FriendsSideBlock";
+import state from "../../redux/state";
 
-export const Navbar = () => {
+type stateFriends = {
+    state:{
+        friends:Array<ArrayFriends>
+    }
+}
+type ArrayFriends = {
+    id: number
+    name: string
+    src: string
+}
+
+export const Navbar = (props:stateFriends) => {
     return(
         <nav className={s.nav}>
             <ul className={s.navMenu}>
@@ -12,6 +25,8 @@ export const Navbar = () => {
                 <li><NavLink to={'/Music'} className={({isActive}) => `${isActive ? s.navMenuActive : ''}`}>Music</NavLink></li>
                 <li><NavLink to={'/Settings'} className={({isActive}) => `${isActive ? s.navMenuActive : ''}`}>Settings</NavLink></li>
             </ul>
+
+            <FriendsSideBlock state={props.state} />
         </nav>
     )
 }

@@ -1,48 +1,60 @@
 import s from './Dialog.module.css';
-import {NavLink} from "react-router-dom";
 import React from "react";
+import {Dialoditem} from "./DialogItem/DialogItem";
+import {Message} from "./Message/Message";
 
-type DialoditemProps = {
-    name: string
+type stateProps = {
+    state: {
+        dialogs: Array<ArrayDialog>
+        messages: Array<ArrayMessages>
+        newMessageText: string
+    }
+    addMessage: () => void
+    updateNewMessageText: (v:string) => void
+}
+type ArrayDialog = {
     id: number
+    name: string
+    src: string
+}
+type ArrayMessages = {
+    id: number
+    authorid: number
+    message: string
 }
 
-const Dialoditem = (props: DialoditemProps) => {
-    let path = '/dialogs/' + props.id
+export const Dialogs: React.FC<stateProps> = (props) => {
 
-    return (
-        <div className={s.dialogItem + ' ' + s.active}>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>
-    )
-}
+    let dialogElements = props.state.dialogs.map(m => <Dialoditem name={m.name} id={m.id} src={m.src}/>)
 
-type MessageProps = {
-    message:string
-}
+    const authorCommets = props.state.messages[0].authorid
 
-const Message = (props:MessageProps) => {
-    return (
-        <div className={s.message}>{props.message}</div>
-    )
-}
+    let messagesElements = props.state.messages.map(m => m.authorid === authorCommets ? <Message message={m.message}/> :
+        <Message message={m.message} authorid={m.authorid}/>)
 
-export const Dialogs = () => {
+
+    let addMessageText = React.createRef<HTMLTextAreaElement>()
+    let addMessage = () => {
+        props.addMessage()
+    }
+
+    let onMessageChange = () => {
+        let message = addMessageText.current?.value
+        props.updateNewMessageText(message as string)
+    }
+
     return (
         <div className={s.dialogsWrap}>
             <div className={s.dialogs}>
                 <h1>Dialogs</h1>
-
-                <Dialoditem name={"Alex"} id={1} />
-                <Dialoditem name={"Igor"} id={2} />
-                <Dialoditem name={"Andrey"} id={3} />
-                <Dialoditem name={"Viktor"} id={4} />
-                <Dialoditem name={"Dmitry"} id={5} />
+                {dialogElements}
             </div>
             <div className={s.messages}>
-                <Message message={"Hi"} />
-                <Message message={"What are you doing?"} />
-                <Message message={"I learn React"} />
+                {messagesElements}
+                <div className={s.addMessageWrap}>
+                    <textarea onChange={ onMessageChange } ref={addMessageText} value={props.state.newMessageText}/>
+                    <button onClick={addMessage}>Send</button>
+                </div>
             </div>
         </div>
     )

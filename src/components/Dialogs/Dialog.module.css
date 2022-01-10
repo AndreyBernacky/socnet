@@ -17,7 +17,16 @@
 }
 .messages{
     padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
 }
 .message{
     padding: 10px 20px; border-radius: 5px; border: 1px solid #333848; margin-bottom: 10px;
+    align-self: flex-start;
+}
+.authorcomments{
+    background: #e2e8f7; color: #000; text-align: right; align-self: flex-end;
+}
+.addMessageWrap{
+
 }
