@@ -1,7 +1,9 @@
 import s from './Dialog.module.css';
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {Dialoditem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
+import {ActionType} from "../../redux/state";
+import {addMessageAC, updateNewMessageAC} from "../../redux/dialogs-reducer";
 
 type stateProps = {
     state: {
@@ -9,8 +11,7 @@ type stateProps = {
         messages: Array<ArrayMessages>
         newMessageText: string
     }
-    addMessage: () => void
-    updateNewMessageText: (v:string) => void
+    dispatch: (action: ActionType) => void
 }
 type ArrayDialog = {
     id: number
@@ -32,15 +33,15 @@ export const Dialogs: React.FC<stateProps> = (props) => {
     let messagesElements = props.state.messages.map(m => m.authorid === authorCommets ? <Message message={m.message}/> :
         <Message message={m.message} authorid={m.authorid}/>)
 
-
-    let addMessageText = React.createRef<HTMLTextAreaElement>()
     let addMessage = () => {
-        props.addMessage()
+        //props.addMessage()
+        props.dispatch(addMessageAC())
     }
 
-    let onMessageChange = () => {
-        let message = addMessageText.current?.value
-        props.updateNewMessageText(message as string)
+    let onMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        let newMessage:string = e.currentTarget.value as string
+        //props.updateNewMessageText(message as string)
+        props.dispatch(updateNewMessageAC(newMessage))
     }
 
     return (
@@ -52,7 +53,10 @@ export const Dialogs: React.FC<stateProps> = (props) => {
             <div className={s.messages}>
                 {messagesElements}
                 <div className={s.addMessageWrap}>
-                    <textarea onChange={ onMessageChange } ref={addMessageText} value={props.state.newMessageText}/>
+                    <textarea
+                        onChange={ onMessageChange }
+                        value={props.state.newMessageText}
+                        placeholder={'Enter New Message Text'}/>
                     <button onClick={addMessage}>Send</button>
                 </div>
             </div>

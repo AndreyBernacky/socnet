@@ -9,34 +9,31 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {News} from './components/News/News';
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {addMessage, RootStateType, updateNewMessageText, updateNewPostText} from "./redux/state";
+import {ActionType, StoreType} from "./redux/state";
 
 type stateProps = {
-    state: RootStateType
-    addPost: () => void
-    updateNewPostText: (v:string) => void
-    addMessage: () => void
-    updateNewMessageText: (v:string) => void
+    store:StoreType
+    dispatch: (action: ActionType) => void
 }
 
 const App:React.FC<stateProps> = (props) => {
+
+    const state = props.store.getState()
 
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
                 <Header/>
-                <Navbar state={props.state.sidebar}/>
+                <Navbar state={state.sidebar}/>
                 <div className={'app-wrapper-cont'}>
                     <Routes>
                         <Route path={'/Dialogs'} element={<Dialogs
-                            state={props.state.dialogsPage}
-                            addMessage={addMessage}
-                            updateNewMessageText={updateNewMessageText}
+                            state={state.dialogsPage}
+                            dispatch={props.dispatch.bind(props.store)}
                         />}/>
                         <Route path={'/Profile'} element={<Profile
-                            state={props.state.profilePage}
-                            addPost={props.addPost}
-                            updateNewPostText={props.updateNewPostText}
+                            state={state.profilePage}
+                            dispatch={props.dispatch.bind(props.store)}
                         />}/>
                         <Route path={'/News'} element={<News/>}/>
                         <Route path={'/Music'} element={<Music/>}/>

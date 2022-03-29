@@ -2,15 +2,14 @@ import React from "react";
 import s from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {updateNewPostText} from "../../redux/state";
+import {ActionType} from "../../redux/state";
 
 type stateProps = {
     state: {
         posts: Array<ArrayData>
         newPostText:string
     }
-    addPost: () => void
-    updateNewPostText: (v:string) => void
+    dispatch: (action: ActionType) => void
 }
 
 
@@ -26,9 +25,8 @@ export const Profile:React.FC<stateProps> = (props) => {
         <div>
             <ProfileInfo/>
             <MyPosts posts={props.state.posts}
-                     addPost={props.addPost}
+                     dispatch={props.dispatch}
                      newPostText={props.state.newPostText}
-                     updateNewPostText={props.updateNewPostText}
             />
         </div>
     )
