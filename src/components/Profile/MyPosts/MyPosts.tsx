@@ -1,13 +1,12 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {ActionType} from "../../../redux/redux-store";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
 
 type postsProps = {
     posts: Array<ArrayData>
     newPostText: string
-    dispatch: (action: ActionType) => void
+    updateNewPostText: (nt:string) => void
+    addPost: () => void
 }
 
 type ArrayData = {
@@ -22,14 +21,13 @@ export const MyPosts: React.FC<postsProps> = (props) => {
 
     let newPastElement = React.createRef<HTMLTextAreaElement>()
 
-    let addPost = () => {
-        props.dispatch(addPostAC())
+    let onAddPost = () => {
+        props.addPost()
     }
 
     let onPostChange = () => {
         let newText: string = newPastElement.current?.value as string
-        //props.updateNewPostText(textPost as string)
-        props.dispatch(updateNewPostTextAC(newText))
+        props.updateNewPostText(newText as string)
     }
 
     return (
@@ -39,7 +37,7 @@ export const MyPosts: React.FC<postsProps> = (props) => {
                 <div>
                     <textarea onChange={onPostChange} ref={newPastElement} value={props.newPostText}/>
                 </div>
-                <button onClick={addPost}>Add post</button>
+                <button onClick={onAddPost}>Add post</button>
             </div>
 
             {postsElements}

@@ -2,16 +2,15 @@ import s from './Dialog.module.css';
 import React, {ChangeEvent} from "react";
 import {Dialoditem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionType} from "../../redux/redux-store";
-import {addMessageAC, updateNewMessageAC} from "../../redux/dialogs-reducer";
 
 type stateProps = {
+    updateNewMessageText: (nm: string) => void
+    addMessage: () => void
     state: {
-        dialogs: Array<ArrayDialog>
-        messages: Array<ArrayMessages>
-        newMessageText: string
-    }
-    dispatch: (action: ActionType) => void
+         dialogs: Array<ArrayDialog>
+         messages: Array<ArrayMessages>
+         newMessageText: string
+     }
 }
 type ArrayDialog = {
     id: number
@@ -34,14 +33,12 @@ export const Dialogs: React.FC<stateProps> = (props) => {
         <Message message={m.message} authorid={m.authorid}/>)
 
     let addMessage = () => {
-        //props.addMessage()
-        props.dispatch(addMessageAC())
+        props.addMessage()
     }
 
-    let onMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        let newMessage:string = e.currentTarget.value as string
-        //props.updateNewMessageText(message as string)
-        props.dispatch(updateNewMessageAC(newMessage))
+    let onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let newMessage: string = e.currentTarget.value as string
+        props.updateNewMessageText(newMessage as string)
     }
 
     return (
@@ -54,7 +51,7 @@ export const Dialogs: React.FC<stateProps> = (props) => {
                 {messagesElements}
                 <div className={s.addMessageWrap}>
                     <textarea
-                        onChange={ onMessageChange }
+                        onChange={onMessageChange}
                         value={props.state.newMessageText}
                         placeholder={'Enter New Message Text'}/>
                     <button onClick={addMessage}>Send</button>

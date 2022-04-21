@@ -10,6 +10,7 @@ import {News} from './components/News/News';
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {ActionType, StoreType} from "./redux/redux-store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type stateProps = {
     store:StoreType
@@ -27,13 +28,11 @@ const App:React.FC<stateProps> = (props) => {
                 <Navbar state={state.sidebar}/>
                 <div className={'app-wrapper-cont'}>
                     <Routes>
-                        <Route path={'/Dialogs'} element={<Dialogs
-                            state={state.dialogsPage}
-                            dispatch={props.dispatch.bind(props.store)}
+                        <Route path={'/Dialogs'} element={<DialogsContainer
+                            store={props.store}
                         />}/>
                         <Route path={'/Profile'} element={<Profile
-                            state={state.profilePage}
-                            dispatch={props.dispatch.bind(props.store)}
+                            store={props.store}
                         />}/>
                         <Route path={'/News'} element={<News/>}/>
                         <Route path={'/Music'} element={<Music/>}/>

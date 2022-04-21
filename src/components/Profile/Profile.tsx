@@ -1,22 +1,10 @@
 import React from "react";
-import s from './Profile.module.css'
-import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionType} from "../../redux/redux-store";
+import {StoreType} from "../../redux/redux-store";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 type stateProps = {
-    state: {
-        posts: Array<ArrayData>
-        newPostText:string
-    }
-    dispatch: (action: ActionType) => void
-}
-
-
-type ArrayData = {
-    id: number
-    messagesPost: string
-    likeCount: number
+    store:StoreType
 }
 
 export const Profile:React.FC<stateProps> = (props) => {
@@ -24,9 +12,7 @@ export const Profile:React.FC<stateProps> = (props) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.state.posts}
-                     dispatch={props.dispatch}
-                     newPostText={props.state.newPostText}
+            <MyPostsContainer store={props.store}
             />
         </div>
     )
