@@ -2,7 +2,6 @@ import React from "react";
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom'
 import {FriendsSideBlock} from "./FriendsSideBlock/FriendsSideBlock";
-import state from "../../redux/state";
 
 type stateFriends = {
     state:{

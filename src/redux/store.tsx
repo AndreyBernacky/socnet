@@ -22,6 +22,7 @@ type FriendsType = {
     name: string
     src: string
 }
+
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
@@ -41,8 +42,8 @@ export type RootStateType = {
 }
 
 export type StoreType = {
-    _state: RootStateType
-    _onChange: () => void
+    //_state: RootStateType
+    //_onChange: () => void
 
     getState: () => RootStateType
     subscribe: (callback: () => void) => void
@@ -50,18 +51,11 @@ export type StoreType = {
     dispatch: (action: ActionType) => void
 }
 
-/*
-type AddPostActionType = ReturnType<typeof addPostAC>
-
-type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
-
-type AddMessageActionType = ReturnType<typeof addMessageAC>
-
-type UpdateNewMessageTextActionType = ReturnType<typeof updateNewMessageAC>
-*/
 export type ActionType =
     profileActionType
     | dialogsActionType
+
+/*
 
 let store: StoreType = {
     _state: {
@@ -111,40 +105,13 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
         this._onChange()
-
     }
 }
-
-/*
-export const addPostAC = () => {
-    return {
-        type: 'ADD-POST'
-    } as const
-}
-export const updateNewPostTextAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
-    } as const
-}
-
-export const addMessageAC = () => {
-    return {
-        type: 'ADD-MESSAGE'
-    } as const
-}
-
-export const updateNewMessageAC = (newMessage:string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newMessage: newMessage
-    } as const
-}
-*/
 export default store
+
+*/
