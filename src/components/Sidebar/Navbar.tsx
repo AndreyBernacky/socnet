@@ -2,6 +2,8 @@ import React from "react";
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom'
 import {FriendsSideBlock} from "./FriendsSideBlock/FriendsSideBlock";
+import StoreContext from "../../StoreContext";
+import store from "../../redux/redux-store";
 
 type stateFriends = {
     state:{
@@ -14,7 +16,7 @@ type ArrayFriends = {
     src: string
 }
 
-export const Navbar = (props:stateFriends) => {
+export const Navbar = () => {
     return(
         <nav className={s.nav}>
             <ul className={s.navMenu}>
@@ -25,7 +27,10 @@ export const Navbar = (props:stateFriends) => {
                 <li><NavLink to={'/Settings'} className={({isActive}) => `${isActive ? s.navMenuActive : ''}`}>Settings</NavLink></li>
             </ul>
 
-            <FriendsSideBlock state={props.state} />
+            <StoreContext.Consumer>
+                { (store) => <FriendsSideBlock state={store.getState().sidebar} />
+                }
+            </StoreContext.Consumer>
         </nav>
     )
 }

@@ -7,13 +7,12 @@ type stateProps = {
     store:StoreType
 }
 
-export const Profile:React.FC<stateProps> = (props) => {
+export const Profile:React.FC = () => {
 
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}
-            />
+            <MyPostsContainer />
         </div>
     )
 }

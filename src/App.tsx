@@ -17,23 +17,22 @@ type stateProps = {
     dispatch: (action: ActionType) => void
 }
 
-const App:React.FC<stateProps> = (props) => {
+const App:React.FC = () => {
 
-    const state = props.store.getState()
+    //const state = props.store.getState()
 
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
                 <Header/>
-                <Navbar state={state.sidebar}/>
+                <Navbar />
                 <div className={'app-wrapper-cont'}>
                     <Routes>
-                        <Route path={'/Dialogs'} element={<DialogsContainer
-                            store={props.store}
-                        />}/>
-                        <Route path={'/Profile'} element={<Profile
-                            store={props.store}
-                        />}/>
+                        <Route path={'/Dialogs'} element={
+                            <DialogsContainer/>}
+                        />
+                        <Route path={'/Profile'} element={
+                            <Profile/>}/>
                         <Route path={'/News'} element={<News/>}/>
                         <Route path={'/Music'} element={<Music/>}/>
                         <Route path={'/Settings'} element={<Settings/>}/>
