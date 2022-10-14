@@ -1,6 +1,9 @@
-import profileReducer, {profileActionType} from "./profile-reducer";
-import dialogsReducer, {dialogsActionType} from "./dialogs-reducer";
-import sidebarReducer from "./sidebar-reducer";
+import {profileActionType} from "./profile-reducer";
+import {dialogsActionType} from "./dialogs-reducer";
+
+export type ActionType = profileActionType | dialogsActionType
+/*
+
 
 type MessagesType = {
     id: number
@@ -51,9 +54,8 @@ export type StoreType = {
     dispatch: (action: ActionType) => void
 }
 
-export type ActionType =
-    profileActionType
-    | dialogsActionType
+
+
 
 /*
 

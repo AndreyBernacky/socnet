@@ -1,38 +1,38 @@
 import React from "react";
-import {StoreType} from "../../../redux/redux-store";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
+import {AppStateType} from "../../../redux/redux-store";
+import {addPostAC, initialStateType, PostsType, updateNewPostTextAC} from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
-import StoreContext from "../../../StoreContext";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
-type postsProps = {
-    store: StoreType
+type mapStatePropsType = {
+    posts:Array<PostsType>,
+    newPostText:string
 }
 
-export const MyPostsContainer: React.FC = () => {
-
-    return (
-        <StoreContext.Consumer>
-            {(store) => {
-
-                let state = store.getState();
-
-
-                let addPost = () => {
-
-                    store.dispatch(addPostAC())
-                }
-
-                let onPostChange = (newText: string) => {
-
-                    store.dispatch(updateNewPostTextAC(newText))
-                }
-                return <MyPosts
-                    updateNewPostText={onPostChange}
-                    addPost={addPost}
-                    posts={state.profilePage.posts}
-                    newPostText={state.profilePage.newPostText}/>
-            }
-            }
-        </StoreContext.Consumer>
-    )
+type mapDispatchPropsType = {
+    updateNewPostText: (newText:string) => void,
+    addPost: () => void
 }
+
+export type ProfilePropsType = mapStatePropsType & mapDispatchPropsType
+
+let mapStateToProps = (state:AppStateType):mapStatePropsType => {
+    return {
+        posts: state.profilePage.posts,
+        newPostText: state.profilePage.newPostText
+    }
+}
+
+let mapDispatchToProps = (dispatch:Dispatch) => {
+    return {
+        updateNewPostText: (newText:string) => {
+            dispatch(updateNewPostTextAC(newText))
+        },
+        addPost: () => {
+            dispatch(addPostAC())
+        }
+    }
+}
+
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)

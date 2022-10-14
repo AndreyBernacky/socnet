@@ -1,21 +1,9 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
+import {ProfilePropsType} from "./MyPostsContainer";
 
-type postsProps = {
-    posts: Array<ArrayData>
-    newPostText: string
-    updateNewPostText: (nt:string) => void
-    addPost: () => void
-}
-
-type ArrayData = {
-    id: number
-    messagesPost: string
-    likeCount: number
-}
-
-export const MyPosts: React.FC<postsProps> = (props) => {
+export const MyPosts: React.FC<ProfilePropsType> = (props) => {
 
     let postsElements = props.posts.map(p => <Post message={p.messagesPost} likeCount={p.likeCount}/>)
 

@@ -2,34 +2,15 @@ import s from './Dialog.module.css';
 import React, {ChangeEvent} from "react";
 import {Dialoditem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
+import { DialogsPropsType } from './DialogsContainer';
 
-type stateProps = {
-    updateNewMessageText: (nm: string) => void
-    addMessage: () => void
-    state: {
-         dialogs: Array<ArrayDialog>
-         messages: Array<ArrayMessages>
-         newMessageText: string
-     }
-}
-type ArrayDialog = {
-    id: number
-    name: string
-    src: string
-}
-type ArrayMessages = {
-    id: number
-    authorid: number
-    message: string
-}
+export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-export const Dialogs: React.FC<stateProps> = (props) => {
+    let dialogElements = props.dialogs.map(m => <Dialoditem name={m.name} id={m.id} src={m.src}/>)
 
-    let dialogElements = props.state.dialogs.map(m => <Dialoditem name={m.name} id={m.id} src={m.src}/>)
+    const authorCommets = props.messages[0].authorid
 
-    const authorCommets = props.state.messages[0].authorid
-
-    let messagesElements = props.state.messages.map(m => m.authorid === authorCommets ? <Message message={m.message}/> :
+    let messagesElements = props.messages.map(m => m.authorid === authorCommets ? <Message message={m.message}/> :
         <Message message={m.message} authorid={m.authorid}/>)
 
     let addMessage = () => {
@@ -52,7 +33,7 @@ export const Dialogs: React.FC<stateProps> = (props) => {
                 <div className={s.addMessageWrap}>
                     <textarea
                         onChange={onMessageChange}
-                        value={props.state.newMessageText}
+                        value={props.newMessageText}
                         placeholder={'Enter New Message Text'}/>
                     <button onClick={addMessage}>Send</button>
                 </div>
