@@ -32,3 +32,13 @@
 .userCity{
     color: #666;
 }
+
+ul.userPager{
+    list-style: none; display: flex; justify-content: center; margin: 20px 0;
+}
+.userPager li{
+    padding: 5px 10px; border-radius: 5px; border: 1px solid #cecece; margin: 0 10px; cursor: pointer;
+}
+.userPager li.userCurrentPage{
+    background: #0a8696; color: #fff; font-weight: bold;
+}
