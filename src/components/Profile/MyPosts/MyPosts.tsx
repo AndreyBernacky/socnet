@@ -5,7 +5,7 @@ import {ProfilePropsType} from "./MyPostsContainer";
 
 export const MyPosts: React.FC<ProfilePropsType> = (props) => {
 
-    let postsElements = props.posts.map(p => <Post message={p.messagesPost} likeCount={p.likeCount}/>)
+    let postsElements = props.posts.map(p => <Post key={p.id} message={p.messagesPost} likeCount={p.likeCount}/>)
 
     let newPastElement = React.createRef<HTMLTextAreaElement>()
 

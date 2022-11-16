@@ -10,6 +10,7 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 const App:React.FC = () => {
@@ -24,8 +25,10 @@ const App:React.FC = () => {
                         <Route path={'/Dialogs'} element={
                             <DialogsContainer/>}
                         />
-                        <Route path={'/Profile'} element={
-                            <Profile/>}/>
+                        <Route path={'/profile/:userId*'} element={
+                            <ProfileContainer/>}/>
+                        <Route path={'/profile/*'} element={
+                            <ProfileContainer/>}/>
                         <Route path={'/Users'} element={
                             <UsersContainer/>}/>
                         <Route path={'/News'} element={<News/>}/>

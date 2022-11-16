@@ -2,18 +2,19 @@ import React from "react";
 import style from "./Users.module.css";
 import userPhoto from "../../assets/img/userdefault.png";
 import {UserType} from "../../redux/users-reducer";
+import {NavLink} from "react-router-dom";
 
 type userShowPropsType = {
-    users:Array<UserType>
+    users: Array<UserType>
     pageSize: number,
-    totalUsersCount:number,
-    currentPage:number,
-    onPageChange:(p:number) => void,
+    totalUsersCount: number,
+    currentPage: number,
+    onPageChange: (p: number) => void,
     follow: (userId: number) => void,
     unfollow: (userId: number) => void
 }
 
-export const Users = (props:userShowPropsType) => {
+export const Users = (props: userShowPropsType) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
@@ -36,7 +37,9 @@ export const Users = (props:userShowPropsType) => {
             {
                 props.users.map(u => <div key={u.id} className={style.userItem}>
                         <div className={style.userLeft}>
-                            <img src={u.photos.small != null ? u.photos.small : userPhoto} alt={u.name} width='100'/>
+                            <NavLink to={'/profile/'+u.id}>
+                                <img src={u.photos.small != null ? u.photos.small : userPhoto} alt={u.name} width='100'/>
+                            </NavLink>
                             {u.followed
                                 ? <button onClick={() => {
                                     props.unfollow(u.id)
