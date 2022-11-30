@@ -6,6 +6,7 @@ import axios from "axios";
 import {PostsType, profileType, setUserProfile} from "../../redux/profile-reducer";
 
 import {NavigateFunction, Params, useLocation, useNavigate, useParams,} from "react-router-dom";
+import {profileAPI} from "../../api/api";
 
 
 export type mapStatePropsType = {
@@ -28,10 +29,9 @@ export type profilePropsType = mapStatePropsType & mapDispatchPropsType & {route
 class ProfileContainer extends React.Component<profilePropsType, any> {
     componentDidMount() {
         let userProfileId = this.props.router.params.userId
-        debugger
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userProfileId)
-            .then(response => {
-                this.props.setUserProfile(response.data)
+        profileAPI.getProfile(userProfileId)
+            .then(data => {
+                this.props.setUserProfile(data)
             })
     }
 
