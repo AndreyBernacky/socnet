@@ -3,6 +3,7 @@ import React, {ChangeEvent} from "react";
 import {Dialoditem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import { DialogsPropsType } from './DialogsContainer';
+import {Navigate} from 'react-router-dom';
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
@@ -21,6 +22,8 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         let newMessage: string = e.currentTarget.value as string
         props.updateNewMessageText(newMessage as string)
     }
+
+    if(!props.isAuth) return <Navigate replace to="/login" />
 
     return (
         <div className={s.dialogsWrap}>
