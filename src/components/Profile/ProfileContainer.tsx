@@ -2,8 +2,7 @@ import React, {ComponentType, Props} from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import axios from "axios";
-import {PostsType, profileType, setUserProfile} from "../../redux/profile-reducer";
+import {getProfile, PostsType, profileType, setUserProfile} from "../../redux/profile-reducer";
 
 import {NavigateFunction, Params, useLocation, useNavigate, useParams,} from "react-router-dom";
 import {profileAPI} from "../../api/api";
@@ -16,7 +15,7 @@ export type mapStatePropsType = {
 }
 
 export type mapDispatchPropsType = {
-    setUserProfile: (profile: profileType) => void
+    getProfile: (userProfileId: string) => void
 }
 
 export type profilePropsType = mapStatePropsType & mapDispatchPropsType & {router: {
@@ -29,10 +28,7 @@ export type profilePropsType = mapStatePropsType & mapDispatchPropsType & {route
 class ProfileContainer extends React.Component<profilePropsType, any> {
     componentDidMount() {
         let userProfileId = this.props.router.params.userId
-        profileAPI.getProfile(userProfileId)
-            .then(data => {
-                this.props.setUserProfile(data)
-            })
+        this.props.getProfile(userProfileId)
     }
 
     render() {
@@ -66,4 +62,4 @@ type WithRouterType = Location & NavigateFunction & Readonly<Params<string>>;
 
 let containerProfileContainer = withRouter<any>(ProfileContainer)
 
-export default connect<mapStatePropsType, mapDispatchPropsType, {}, AppStateType>(mapStateToProps, {setUserProfile})(containerProfileContainer);
+export default connect<mapStatePropsType, mapDispatchPropsType, {}, AppStateType>(mapStateToProps, {getProfile})(containerProfileContainer);
